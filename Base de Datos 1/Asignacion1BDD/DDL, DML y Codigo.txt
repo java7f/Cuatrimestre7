@@ -1,0 +1,151 @@
+DDL:
+
+create table persona(
+idconductor int identity(1,1) primary key,
+nombre varchar(50) not null,
+direccion varchar(50) not null)
+
+create table coche(
+matricula varchar(10) primary key, 
+ano int not null, 
+modelo varchar(20) not null
+)
+
+create table accidente(
+numeroinforme int identity(1,1) primary key, 
+fecha date not null, 
+lugar varchar(50) not null)
+
+
+create table esdueno(
+idconductor int,
+matricula varchar(10),
+constraint fk_persona foreign key(idconductor) references persona(idconductor),
+constraint fk_coche foreign key(matricula) references coche(matricula))
+
+create table participo(
+idconductor int, 
+matricula varchar(10),
+numeroinforme int,
+importedanos money not null,
+constraint fk2_persona foreign key(idconductor) references persona(idconductor),
+constraint fk2_coche foreign key(matricula) references coche(matricula),
+constraint fk_accidente foreign key(numeroinforme) references accidente(numeroinforme))
+
+DML:
+
+insert into persona(nombre, direccion)
+values ('Manolo Santos', 'Bella Vista, Avenida Sarasota, Edif, Clarence XI'),
+	   ('Katiuska Corvillo', 'Calle Palo Incado, Casa #123'),
+	   ('Penelope Dominguez', 'Calle Girasol, Casa #642'),
+	   ('Luis Rojas', 'Av. Max Henriquez Ureña, Torre Sol'),
+	   ('Melanie Nuñez', 'Calle Nogales #321'),
+	   ('Lys Perez', 'Colinas de Bello Monte, Torre 403'),
+	   ('Vicente Cassidy', 'Calle Bohechio 17'),
+	   ('Isabella Sarno', 'Calle Luis Thomen 34'),
+	   ('Javier Falcon', 'Av Francisco Prats Ramirez 147'),
+	   ('Raul Herrera', 'Av Luperon #12')
+
+insert into coche(matricula, ano, modelo)
+values ('c32432', 2015, 'Hyundai Sonata'),
+	   ('g78640', 2010, 'Mazda CX-3'),
+	   ('c34536', 2014, 'Hyundai Sonata'),
+	   ('g14578', 2005, 'Jeep Grand Cherokee'),
+	   ('g32423', 2004, 'Porsche Cayenne'),
+	   ('0x0fff', 2001, 'Volvo'),
+	   ('f44554', 2013, 'Kia Picanto'),
+	   ('l34345', 1988, 'Toyota Corolla'),
+	   ('t34343', 1984, 'Chevrolet Malibu'),
+	   ('u34454', 2016, 'Hyundai Sonata')
+
+insert into accidente(fecha, lugar) 
+values ('7/6/1989', 'Manchester'),
+	   ('2/4/2010', 'Santo Domingo'),
+	   ('5/16/2005', 'Santiago'),
+	   ('9/24/2015', 'Bogotá'),
+	   ('1/1/1989', 'La Vega'),
+	   ('5/20/2007', 'Santiago'),
+	   ('11/9/1989', 'Santo Domingo'),
+	   ('3/28/2011', 'Lima'),
+	   ('12/31/1999', 'Punta Cana'),
+	   ('9/12/2005', 'Caracas')
+
+insert into esdueno(idconductor, matricula)
+values (1, 'c32432'),
+	   (2, 'g78640'),
+	   (3, 'c34536'),
+	   (4, 'g14578'),
+	   (5, 'g32423'),
+	   (6, '0x0fff'),
+	   (7, 'f44554'),
+	   (8, 'l34345'),
+	   (9, 't34343'),
+	   (10, 'u34454')
+
+insert into participo(idconductor, matricula, numeroinforme, importedanos)
+values (1, 'c32432', 3, 2000),
+	   (2, 'g78640', 5, 1350),
+	   (3, 'c34536', 1, 400),
+	   (4, 'g14578', 4, 900),
+	   (5, 'g32423', 10, 5000),
+	   (6, '0x0fff', 2, 3200),
+	   (7, 'f44554', 8, 325),
+	   (8, 'l34345', 7, 156),
+	   (9, 't34343', 9, 1158),
+	   (10, 'u34454', 6, 645)
+
+Codigos:
+
+A. Buscar el número total de las personas cuyos coches
+se han visto involucrados en un accidente en 1989.
+
+select count(*), YEAR(fecha)
+from accidente
+where YEAR(fecha) = 1989
+group by YEAR(fecha)
+
+
+B. Buscar el número de accidentes en los cuales se ha
+visto involucrado un coche perteneciente a «Santos».
+
+
+select count(*), matricula
+from participo
+where idconductor in (select idconductor
+		      from persona
+		      where nombre like '%Santos%')
+group by matricula
+
+C. Añadir un nuevo accidente a la base de datos; supóngase
+cualquier valor para los atributos necesarios.
+
+insert into accidente(fecha, lugar)
+values ('3/7/1998', 'Santo Domingo')
+
+D. Borrar el Mazda de «Santos».
+
+alter table esdueno nocheck constraint all
+alter table participo nocheck constraint all
+
+update coche
+set modelo = 'Mazda CX-5'
+where matricula = 'c32432'
+
+
+delete from coche
+where matricula in (select matricula
+					from esdueno
+					where idconductor in (select idconductor
+										  from persona
+										  where nombre like '%Santos%')) and modelo like '%Mazda%'
+
+E. Actualizar el importe de daños del coche de matrí-
+	cula «t34343» en el accidente con número de
+	informe «9» a 3.000 €.
+
+update participo
+set importedanos = 3000
+where matricula = 't34343' and numeroinforme = 9
+select * from participo
+
+
