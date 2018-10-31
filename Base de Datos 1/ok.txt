@@ -1,0 +1,98 @@
+prestamo
+número-préstamo 			nombre-sucursal 				importe
+P-11						Collado Mediano					900
+P-14						Centro							1.500
+P-15						Navacerrada						1.500
+P-16						Navacerrada						1.300
+P-17						Centro							1.000
+P-23						Moralzarzal						2.000
+P-93						Becerril						500
+
+prestario
+nombre cliente				número préstamo
+Fernández       			P-16
+Gómez           			P-93
+Gómez           			P-15
+López           			P-14
+Pérez           			P-17
+Santos          			P-11
+Sotoca          			P-23
+Valdivieso      			P-17
+
+impositor
+nombre cliente 				número cuenta
+Abril						C-102
+Gómez						C-101
+González					C-201
+González					C-217
+López						C-222
+Rupérez						C-215
+Santos						C-305
+
+sucursal
+nombre de la sucursal 		ciudad de la sucursal 			activos
+Galapagar              		Arganzuela						7.500
+Centro						Arganzuela						9.000.000
+Becerril					Aluche							2.000
+Segovia						Cerceda							3.700.000
+Navacerrada					Aluche							1.700.000
+Navas de la Asunción		Alcalá de Henares				1.500
+Moralzarzal					La Granja						2.500
+Collado Mediano				Aluche							8.000.000
+
+Cliente
+nombre-cliente				calle-cliente					ciudad-cliente
+Abril						Preciados						Valsaín                   
+Amo							Embajadores						Arganzuela                   
+Badorrey					Delicias						Valsaín            
+Fernández					Jazmín							León
+Gómez						Carretas						Cerceda
+González					Arenal							La Granja
+López						Mayor							Peguerinos
+Pérez						Carretas						Cerceda
+Rodríguez					Yeserías						Cádiz
+Rupérez						Ramblas							León
+Santos						Mayor							Peguerinos
+Valdivieso					Goya							Vigo
+
+Cuenta
+número-cuenta				nombre-sucursal					saldo
+C-101						Centro							500
+C-215						Becerril						700
+C-102						Navacerrada						400
+C-305						Collado Mediano					350
+C-201						Galapagar						900
+C-222						Moralzarzal						700
+C-217						Galapagar						750
+
+trabajo-por-horas
+nombre-empleado				nombre-sucursal					sueldo
+González					Centro							1.500
+Díaz						Centro							1.300
+Jiménez						Centro							2.500
+Catalán						Leganés							1.600
+Cana						Leganés							1.500
+Cascallar					Navacerrada						5.300
+Fernández					Navacerrada						1.500
+Ribera						Navacerrada						1.300
+
+informacion-credito
+nombre-cliente				límite							saldo-crédito
+Gómez						2.000							400
+López						1.500							1.500
+Pérez						2.000							1.750
+Santos						6.000							700
+
+empleado
+nombre-empleado				calle							ciudad
+Segura						Tebeo							La Loma
+Domínguez					Viaducto						Villaconejos
+Gómez						Bailén							Alcorcón
+Valdivieso					Fuencarral						Móstoles
+
+trabajo-a-tiempo-completo
+nombre-empleado				nombre-sucursal					sueldo
+Segura						Majadahonda						1.500
+Domínguez					Majadahonda						1.300
+Barea						Fuenlabrada						5.300
+Valdivieso					Fuenlabrada						1.500
