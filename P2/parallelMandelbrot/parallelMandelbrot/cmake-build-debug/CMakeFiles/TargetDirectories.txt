@@ -1,0 +1,3 @@
+/home/java7f/CLionProjects/parallelMandelbrot/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/java7f/CLionProjects/parallelMandelbrot/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/java7f/CLionProjects/parallelMandelbrot/cmake-build-debug/CMakeFiles/parallelMandelbrot.dir

@@ -1,0 +1,71 @@
+Practica V
+
+3.1 In Example 3.2, each union and intersection operation can be performed in time proportional to the sum of the number of records in the two input tables. Based on this, construct the weighted task-dependency graphs corresponding to Figures 3.2 and 3.3, where the weight of each number node is equivalent to the amount of work required by the corresponding task. What is the average degree of concurrency of each graph?
+
+Para el primero 2.33
+Para el segundo 1.88
+
+3.2 For the task graphs given in Figure 3.42, determine the following:
+1.Maximum degree of concurrency.
+a) 8
+b) 8
+c) 8
+d) 2
+2.Critical  path  length.
+a) 4
+b) 4
+c) 7
+d) 8
+3.Maximum achievable speedup over one process assuming that an arbitrarily large number of processes is available.
+Asumiendo que se consume lo mismo en cada tarea
+a) 15/4
+b) 15/4
+c) 2 (14/7)
+d) 15/8
+4.The minimum number of processes needed to obtain the maximum possible speedup.
+a) 8
+b) 8
+c) 3
+d) 2
+5.The maximum achievable speedup if the number of processes is limited to (a) 2, (b)4, and (c) 8.
+(A)
+a) 15/8
+b) 15/8
+c) 7/4 (14/8)
+d) 15/8
+(B)
+a) 3 (15/5)
+b) 3 (15/5)
+c) 2 (14/7)
+d) 15/8
+(C)
+a) 15/4
+b) 15/4
+c) 2 (14/7)
+d) 15/8
+Figure 3.42. Task-dependency graphs for Problem 3.2.
+
+3.3 What are the average degrees of concurrency and critical-path lengths of task-dependency graphs corresponding to the decompositions for matrix multiplication shown in Figures 3.10 and 3.11?
+
+Para la figura 3.10 la longitud de la ruta critica seria 1 y su grado de concurrencia coincidiria con el maximo que es 4, mientras que para la figura 4.11 la longitud de laruta critica seria 2 y su grado de concurrencia promedio seria 4.
+
+
+3.4 Let d be the maximum degree of concurrency in a task-dependency graph with t tasks and a critical-path length l. Prove that t/l <= d <= t - l + 1.
+t/l define el grado de concurrencia promedio cuyo rango va desde 1 hasta d(maximo grado de concurrencia) por tanto este siempre sera menor o igual al grado de concurrencia maximo. Mientras que t-l + 1 es cierto por que en el caso mas trivial (un arbol donde l = t) el valor coincide con el del maximo grado de concurrencia que en este caso seria 1, por tanto al agregar mas nodos y t > l sera imposible que el resultado de la resta sea menor que el mayor grado de concurrencia.
+
+
+3.5 Consider LU factorization of a dense matrix shown in Algorithm  3.3. Figure 3.27 shows the decomposition of LU factorization into 14 tasks based on a two-dimensional partitioning of the matrix A into nine blocks A(i,j)  , 1 <= i , j <= 3. The blocks of A are modified into corresponding blocks of L and U as a result of factorization. The diagonal blocks of L are lower triangular submatrices with unit diagonals and the diagonal blocks of U are upper triangular submatrices. Task 1 factors the submatrix A1,1 using Algorithm  3.3.Tasks 2 and 3 implement the block versions of the loop on Lines 4–6 of Algorithm  3.3. Tasks 4 and 5 are the upper-triangular counterparts of tasks 2 and 3. The element version of LU factorization in Algorithm 3.3 does not show these steps because the diagonalentries of L are 1; however, a block version must compute a block-row of U as a product of the inverse of the corresponding diagonal block of L with the block-row of A. Tasks 6–9 implement the block version of the loops on Lines 7–11 of Algorithm  3.3. Thus, Tasks 1–9 correspond to the block version of the first iteration of the outermost loop of Algorithm 3.3. The remainder of the tasks complete the factorization of A. Draw a task-dependency graph corresponding to the decomposition shown in Figure 3.27.
+
+3.6 Enumerate the critical paths in the decomposition of LU factorization shown in Figure 3.27. 
+
+1->2->6->10->13->14
+
+3.7 Show an efficient mapping of the task-dependency graph of the decomposition shown in Figure 3.27 onto three processes. Prove informally that your mapping is the best possible mapping for three processes.
+P0	1	2	5	8	11
+P1 		3	6	9	12	14
+P2 		4	7	10	13
+3.8 Describe and draw an efficient mapping of the task-dependency graph of the decomposition shown in Figure 3.27 onto four processes and prove that your mapping is the best possible mapping for four processes.
+P0	1	2	6	8
+P1		3	7	11	12
+P2		4	9	13	14
+P3		5	10
